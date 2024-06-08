@@ -1,7 +1,7 @@
 
 var numberBtns = []
 var btnAdd, btnMinus, btnMul, btnDiv, btnEqual;
-var btnCE, btnC;
+var btnCE, btnC, btnInverse;
 
 var toCalcNumber1 = ''
 var toCalcNumber2 = ''
@@ -15,6 +15,11 @@ var pUserInputDisplay, pResult;
 document.addEventListener('DOMContentLoaded', function() {
     btnAdd = this.getElementById('btn-add');
     btnAdd.addEventListener('click', function() {
+        if (currentResult === 'NaN') return;
+
+        if (toCalcNumber1 === '' || toCalcNumber1 === '0') 
+            if (!equalPressed) return;
+
         if (equalPressed) 
             equalPressed = false;
         
@@ -32,6 +37,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     btnMinus = this.getElementById('btn-minus');
     btnMinus.addEventListener('click', function() {
+        if (currentResult === 'NaN') return;
+
         if (equalPressed) 
             equalPressed = false;
 
@@ -48,6 +55,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     btnMul = this.getElementById('btn-mul');
     btnMul.addEventListener('click', function() {
+        if (currentResult === 'NaN') return;
+
+        if (toCalcNumber1 === '' || toCalcNumber1 === '0') 
+            if (!equalPressed) return;
+
         if (equalPressed) 
             equalPressed = false;
 
@@ -64,6 +76,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     btnDiv = this.getElementById('btn-div');
     btnDiv.addEventListener('click', function() {
+        if (currentResult === 'NaN') return;
+        
+        if (toCalcNumber1 === '' || toCalcNumber1 === '0') 
+            if (!equalPressed) return;
+
         if (equalPressed) 
             equalPressed = false;
 
@@ -94,13 +111,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 Cexecute();
             }
             
-            if (toCalcNumber1 == '0')
+            if (toCalcNumber1 == '0' && sign === '')
                 toCalcNumber1 = '';
 
             if (sign === '' && toCalcNumber1.length < 12)
                 toCalcNumber1 += i;
-            else if (sign !== '' && toCalcNumber2.length < 12)
+            else if (sign !== '' && toCalcNumber2.length < 12 && toCalcNumber1 !== '')
                 toCalcNumber2 += i;
+            else if (!toCalcNumber1 && sign === '-') {
+                toCalcNumber1 += -i;
+                sign = '';
+            }
 
             updateScreen();
         })
@@ -120,7 +141,25 @@ document.addEventListener('DOMContentLoaded', function() {
     })
 
     btnC = this.getElementById('btn-C');
-    btnC.addEventListener('click', Cexecute)
+    btnC.addEventListener('click', Cexecute);
+
+    btnInverse = this.getElementById('btn-inverse');
+    btnInverse.addEventListener('click', function() {
+        if (toCalcNumber1 !== '' && toCalcNumber2 !== '' && sign !== '') {
+            getResult();
+            toCalcNumber2 = '';
+            sign = '';
+        }
+        else if (toCalcNumber1) {
+            if (!toCalcNumber2) toCalcNumber2 = '';
+            if (!currentResult) currentResult = parseInt(toCalcNumber1);
+        }
+
+        currentResult = (Math.round(1.0/currentResult * 1000) / 1000).toFixed(3);
+        toCalcNumber1 = currentResult;
+        updateScreen();
+        equalPressed = true;
+    })
 })
 
 function Cexecute() {
@@ -179,10 +218,10 @@ function multiply() {
 function division() {
     if (parseInt(toCalcNumber2) == 0)
         currentResult = 'NaN'
-    else 
+    else {
         currentResult = parseInt(toCalcNumber1) / parseInt(toCalcNumber2);
-
-    currentResult = (Math.round(currentResult * 1000) / 1000).toFixed(3);
+        currentResult = (Math.round(currentResult * 1000) / 1000).toFixed(3);
+    }
 
     return currentResult;
 }
