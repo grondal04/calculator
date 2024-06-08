@@ -16,40 +16,41 @@
 
     <div class="calculator-box">
         <div class="calculator-display">
-            <p class="user-input-display">1 + 1</p>
+            <p class="user-input-display">0</p>
             <div class="result-display">
                 <img src="./assets/Equals.svg" alt="">
-                <p id="result">2</p>
+                <p id="result">0</p>
             </div>
         </div>
 
         <div class="buttons-container">
-            <button class="circle-button black-bg-btn purple-text">CE</button>
-            <button class="circle-button black-bg-btn white-text">C</button>
-            <button class="circle-button black-bg-btn"><img src="./assets/Percent.svg" alt=""></button>
-            <button class="circle-button purple-bg-btn"><img src="./assets/Divide.svg" alt=""></button>
+            <button class="circle-button black-bg-btn purple-text" id="btn-CE">CE</button>
+            <button class="circle-button black-bg-btn white-text" id="btn-C">C</button>
+            <button class="circle-button black-bg-btn white-text" id="btn-inverse">⅟</button>
+            <button class="circle-button purple-bg-btn" id="btn-div"><img src="./assets/Divide.svg" alt=""></button>
 
-            <button class="circle-button black-bg-btn white-text">7</button>
-            <button class="circle-button black-bg-btn white-text">8</button>
-            <button class="circle-button black-bg-btn white-text">9</button>
-            <button class="circle-button purple-bg-btn white-text"><img src="./assets/X.svg" alt=""></button>
+            <button class="circle-button black-bg-btn white-text" id="btn-7">7</button>
+            <button class="circle-button black-bg-btn white-text" id="btn-8">8</button>
+            <button class="circle-button black-bg-btn white-text" id="btn-9">9</button>
+            <button class="circle-button purple-bg-btn white-text" id="btn-mul"><img src="./assets/X.svg" alt=""></button>
 
-            <button class="circle-button black-bg-btn white-text">4</button>
-            <button class="circle-button black-bg-btn white-text">5</button>
-            <button class="circle-button black-bg-btn white-text">6</button>
-            <button class="circle-button purple-bg-btn white-text"><img src="./assets/Minus.svg" alt=""></button>
+            <button class="circle-button black-bg-btn white-text" id="btn-4">4</button>
+            <button class="circle-button black-bg-btn white-text" id="btn-5">5</button>
+            <button class="circle-button black-bg-btn white-text" id="btn-6">6</button>
+            <button class="circle-button purple-bg-btn white-text" id="btn-minus"><img src="./assets/Minus.svg" alt=""></button>
 
-            <button class="circle-button black-bg-btn white-text">1</button>
-            <button class="circle-button black-bg-btn white-text">2</button>
-            <button class="circle-button black-bg-btn white-text">3</button>
-            <button class="circle-button purple-bg-btn white-text"><img src="./assets/Plus.svg" alt=""></button>
+            <button class="circle-button black-bg-btn white-text" id="btn-1">1</button>
+            <button class="circle-button black-bg-btn white-text" id="btn-2">2</button>
+            <button class="circle-button black-bg-btn white-text" id="btn-3">3</button>
+            <button class="circle-button purple-bg-btn white-text" id="btn-add"><img src="./assets/Plus.svg" alt=""></button>
 
-            <button class="circle-button black-bg-btn white-text"><img src="./assets/PlusMinus.svg" alt=""></button>
-            <button class="circle-button black-bg-btn white-text">0</button>
-            <button class="circle-button black-bg-btn white-text">,</button>
-            <button class="circle-button purple-bg-btn white-text"><img src="./assets/Equals2.svg" alt=""></button>
+            <button class="circle-button black-bg-btn white-text" id="btn-negative-switch"><img src="./assets/PlusMinus.svg" alt=""></button>
+            <button class="circle-button black-bg-btn white-text" id="btn-0">0</button>
+            <button class="circle-button black-bg-btn white-text" id="btn-commas">,</button>
+            <button class="circle-button purple-bg-btn white-text" id="btn-equal"><img src="./assets/Equals2.svg" alt=""></button>
         </div>
     </div>
     
+    <script src="./script/main.js"></script>
 </body>
 </html>
