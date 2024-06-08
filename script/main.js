@@ -1,10 +1,10 @@
 
 var numberBtns = []
 var btnAdd, btnMinus, btnMul, btnDiv, btnEqual;
-var btnCE, btnC, btnInverse;
+var btnCE, btnC, btnInverse, btnNegativeSwitch, btnCommas;
 
-var toCalcNumber1 = ''
-var toCalcNumber2 = ''
+var toCalcNumber1 = ''; num1Commas = false;
+var toCalcNumber2 = ''; num2Commas = false;
 var sign = ''
 var currentResult = 0;
 
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
     btnDiv = this.getElementById('btn-div');
     btnDiv.addEventListener('click', function() {
         if (currentResult === 'NaN') return;
-        
+
         if (toCalcNumber1 === '' || toCalcNumber1 === '0') 
             if (!equalPressed) return;
 
@@ -102,6 +102,8 @@ document.addEventListener('DOMContentLoaded', function() {
             updateScreen();
             equalPressed = true;
         }
+
+        resetCommas();
     })
 
     for (let i = 0; i <= 9; i++) {
@@ -159,6 +161,44 @@ document.addEventListener('DOMContentLoaded', function() {
         toCalcNumber1 = currentResult;
         updateScreen();
         equalPressed = true;
+        resetCommas();
+    })
+
+    btnNegativeSwitch = this.getElementById('btn-negative-switch');
+    btnNegativeSwitch.addEventListener('click', function() {
+        if (toCalcNumber1 !== '' && toCalcNumber2 !== '' && sign !== '') {
+            getResult();
+            toCalcNumber2 = '';
+            sign = '';
+        }
+        else if (toCalcNumber1) {
+            if (!toCalcNumber2) toCalcNumber2 = '';
+            if (!currentResult) currentResult = parseFloat(toCalcNumber1);
+        }
+
+        currentResult = -currentResult;
+        toCalcNumber1 = currentResult;
+        updateScreen();
+        equalPressed = true;
+        resetCommas();
+    })
+
+    btnCommas = this.getElementById('btn-commas');
+    btnCommas.addEventListener('click', function() {
+        if (sign === '' && toCalcNumber1.length < 12 && !num1Commas) {
+            toCalcNumber1 += '.';
+            num1Commas = true;
+        }
+        else if (sign !== '' && toCalcNumber2.length < 12 && toCalcNumber1 !== '' && !num2Commas) {
+            toCalcNumber2 += '.';
+            num2Commas = true;
+        }
+        else if (!toCalcNumber1 && sign === '-') {
+            toCalcNumber1 += -i;
+            sign = '';
+        }
+
+        updateScreen();
     })
 })
 
@@ -169,11 +209,18 @@ function Cexecute() {
     toCalcNumber2 = '';
     sign = '';
     currentResult = 0;
-
     updateScreen();
 }
 
+function resetCommas() {
+    num1Commas = false;
+    num2Commas = false;
+
+}
+
 function getResult() {
+    resetCommas();
+
     switch (sign) {
         case '+':
             add();
@@ -201,26 +248,28 @@ function updateScreen() {
 }
 
 function add() {
-    currentResult = parseInt(toCalcNumber1) + parseInt(toCalcNumber2);
+    currentResult = parseFloat(toCalcNumber1) + parseFloat(toCalcNumber2);
     return currentResult;
 }
 
 function minus() {
-    currentResult = parseInt(toCalcNumber1) - parseInt(toCalcNumber2);
+    currentResult = parseFloat(toCalcNumber1) - parseFloat(toCalcNumber2);
     return currentResult;
 }
 
 function multiply() {
-    currentResult = parseInt(toCalcNumber1) * parseInt(toCalcNumber2);
+    currentResult = parseFloat(toCalcNumber1) * parseFloat(toCalcNumber2);
     return currentResult;
 }
 
 function division() {
-    if (parseInt(toCalcNumber2) == 0)
+    if (parseFloat(toCalcNumber2) == 0)
         currentResult = 'NaN'
     else {
-        currentResult = parseInt(toCalcNumber1) / parseInt(toCalcNumber2);
-        currentResult = (Math.round(currentResult * 1000) / 1000).toFixed(3);
+        currentResult = parseFloat(toCalcNumber1) / parseFloat(toCalcNumber2);
+        
+        if ((currentResult*1000) - parseFloat(currentResult*1000)) //If the number is double/float, we make sure it only has 3 decimals
+            currentResult = (Math.round(currentResult * 1000) / 1000).toFixed(3);
     }
 
     return currentResult;
