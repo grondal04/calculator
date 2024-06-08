@@ -1,0 +1,144 @@
+* {
+    font-family: 'Rubik';
+
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calculator-box {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    padding: 3rem 2rem;
+    width: 356px;
+    height: 566px;
+
+    margin: auto;
+
+    border-radius: 48px;
+    background: #2D2A37;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 188px 52px 0px rgba(0, 0, 0, 0.01), 0px 120px 48px 0px rgba(0, 0, 0, 0.04), 0px 68px 41px 0px rgba(0, 0, 0, 0.15), 0px 30px 30px 0px rgba(0, 0, 0, 0.26), 0px 8px 17px 0px rgba(0, 0, 0, 0.29), 0px 6px 8px 0px rgba(255, 255, 255, 0.10) inset, 0px -4px 5px 0px rgba(0, 0, 0, 0.22) inset;
+}
+
+.calculator-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 1rem;
+
+    padding: 0 1rem;
+}
+
+.result-display {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    height: fit-content;
+
+}
+
+p.user-input-display {
+    color: #6B6B6B;
+
+    text-align: right;
+    font-family: Rubik;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 28px */
+    letter-spacing: -0.4px;
+
+    align-self: flex-end;
+}
+
+p#result {
+    color: #EBEBEB;
+    text-align: right;
+    font-family: Rubik;
+    font-size: 3rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 50.4px */
+    letter-spacing: -0.72px;
+
+    padding: 0;
+    margin: 0;
+}
+
+.buttons-container {
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: space-between;
+}
+
+.circle-button {
+
+    flex-shrink: 0;
+
+    margin: 8px;
+
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    box-shadow: 0px 11px 7px 0px rgba(0, 0, 0, 0.01), 0px 7px 7px 0px rgba(0, 0, 0, 0.04), 0px 4px 6px 0px rgba(0, 0, 0, 0.10), 0px 2px 4px 0px rgba(0, 0, 0, 0.26), 0px 0px 2px 0px rgba(0, 0, 0, 0.29), 0px 2px 3px 0px rgba(255, 255, 255, 0.06) inset;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.black-bg-btn {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 0%, rgba(255, 255, 255, 0.05) 100%), #2D2A37;
+}
+
+.purple-bg-btn {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 0.01%, rgba(255, 255, 255, 0.05) 100%), #462878;
+}
+
+.purple-text {
+    color: #975DFA;
+    text-align: center;
+    font-family: Rubik;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.48px;
+}
+
+.white-text {
+    color: #EBEBEB;
+    text-align: center;
+    font-family: Rubik;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.48px;
+}
+
+.purple-text {
+    color: #975DFA;
+    text-align: center;
+    font-family: Rubik;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.48px;
+}
