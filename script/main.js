@@ -137,6 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (toCalcNumber2 && !equalPressed) {
             toCalcNumber2 = '';
+            num2Commas = false;
             updateScreen();
         } else
             Cexecute();
@@ -173,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         else if (toCalcNumber1) {
             if (!toCalcNumber2) toCalcNumber2 = '';
-            if (!currentResult) currentResult = parseFloat(toCalcNumber1);
+            if (!currentResult) currentResult = roundFloat(toCalcNumber1);
         }
 
         currentResult = -currentResult;
@@ -244,33 +245,66 @@ function getResult() {
 
 function updateScreen() {
     pUserInputDisplay.textContent = `${toCalcNumber1} ${sign} ${toCalcNumber2}`;
+
+    if (countDecimalPlaces(currentResult)) //If the number is double/float, we make sure it only has 3 decimals
+        currentResult = roundFloat(currentResult)
     pResult.textContent = currentResult;
 }
 
 function add() {
-    currentResult = parseFloat(toCalcNumber1) + parseFloat(toCalcNumber2);
+    currentResult = roundFloat(toCalcNumber1) + roundFloat(toCalcNumber2);
     return currentResult;
 }
 
 function minus() {
-    currentResult = parseFloat(toCalcNumber1) - parseFloat(toCalcNumber2);
+    currentResult = roundFloat(toCalcNumber1) - roundFloat(toCalcNumber2);
     return currentResult;
 }
 
 function multiply() {
-    currentResult = parseFloat(toCalcNumber1) * parseFloat(toCalcNumber2);
+    currentResult = roundFloat(toCalcNumber1) * roundFloat(toCalcNumber2);
     return currentResult;
 }
 
 function division() {
-    if (parseFloat(toCalcNumber2) == 0)
+    if (parseInt(toCalcNumber2) == 0)
         currentResult = 'NaN'
     else {
         currentResult = parseFloat(toCalcNumber1) / parseFloat(toCalcNumber2);
         
-        if ((currentResult*1000) - parseFloat(currentResult*1000)) //If the number is double/float, we make sure it only has 3 decimals
-            currentResult = (Math.round(currentResult * 1000) / 1000).toFixed(3);
+        if (countDecimalPlaces(currentResult) > 3) //If the number is double/float, we make sure it only has 3 decimals
+            currentResult = roundFloat(currentResult)
     }
 
     return currentResult;
+}
+
+function countDecimalPlaces(floatNumber) {
+    // Convert the number to a string
+    var numberString = floatNumber.toString();
+    
+    // Check if the number has a decimal point
+    var decimalIndex = numberString.indexOf('.');
+    
+    // If there is no decimal point, return 0
+    if (decimalIndex === -1) {
+        return 0;
+    }
+    
+    // Calculate the number of decimal places
+    var decimalPlaces = numberString.length - decimalIndex - 1;
+    
+    return decimalPlaces;
+}
+
+function roundFloat(floatNumber) {
+    floatNumber = (Math.round(floatNumber * 1000) / 1000).toFixed(3);
+    
+    let strNumber = floatNumber.toString();
+    
+    // Remove all the zeros from the string
+    let result = strNumber.replace(/(\.\d*?[1-9])0*$/, '$1');
+    
+    // Parse the result back to a float
+    return parseFloat(result);
 }
